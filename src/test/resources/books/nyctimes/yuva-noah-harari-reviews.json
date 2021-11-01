@@ -1,0 +1,33 @@
+{
+  "status": "OK",
+  "copyright": "Copyright (c) 2021 The New York Times Company.  All Rights Reserved.",
+  "num_results": 2,
+  "results": [
+    {
+      "url": "http:\/\/www.nytimes.com\/2017\/03\/13\/books\/review\/yuval-noah-harari-homo-deus.html",
+      "publication_dt": "2017-03-13",
+      "byline": "SIDDHARTHA MUKHERJEE",
+      "book_title": "Homo Deus",
+      "book_author": "Yuval Noah Harari",
+      "summary": "In “Homo Deus,” Yuval Noah Harari suggests the natural end of the scientific revolution might be human obsolescence.",
+      "uuid": "00000000-0000-0000-0000-000000000000",
+      "uri": "nyt:\/\/book\/00000000-0000-0000-0000-000000000000",
+      "isbn13": [
+        "9780062464316"
+      ]
+    },
+    {
+      "url": "https:\/\/www.nytimes.com\/2018\/09\/04\/books\/review\/21-lessons-for-the-21st-century-yuval-noah-harari.html",
+      "publication_dt": "2018-09-04",
+      "byline": "BILL GATES",
+      "book_title": "21 Lessons for the 21st Century",
+      "book_author": "Yuval Noah Harari",
+      "summary": "In “21 Lessons for the 21st Century,” Yuval Noah Harari’s latest book, the historian takes on everything from terrorism to inequality.",
+      "uuid": "00000000-0000-0000-0000-000000000000",
+      "uri": "nyt:\/\/book\/00000000-0000-0000-0000-000000000000",
+      "isbn13": [
+        "9780525512172"
+      ]
+    }
+  ]
+}
