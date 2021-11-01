@@ -11,8 +11,6 @@ import io.circe.generic.auto._
 import io.finch.circe._
 
 object Main extends IOApp with IOLogging {
-//  val registry = CollectorRegistry.defaultRegistry
-//  val statsReceiver = new PrometheusStatsReceiver(registry)
 
   override def run(args: List[String]): IO[ExitCode] = for {
     conf <- IO.fromTry(maybeConfig)
@@ -20,8 +18,8 @@ object Main extends IOApp with IOLogging {
     client = new NycTimesClient(conf.nyc.apiKey, conf.nyc.requestTimeout)
     cachedProvider = new BookCachedProvider(client, conf.cacheTTL)
     bookApi = new BookApi(cachedProvider)
-    server <- IO.delay(Http.server.serve(conf.internalApi, bookApi.endpoints.toService)) //    .configured(Stats(statsReceiver))
+    server <- IO.delay(Http.server.serve(conf.internalApi, bookApi.endpoints.toService))
     _ <- IO.delay(Await.ready(server))
-  } yield ExitCode.Success //TODO log errors
+  } yield ExitCode.Success
 
 }
