@@ -11,7 +11,7 @@ Author name is mandatory, year is optional, you can specify more than one year.
    you do not want to keep secrets under Git!
    Or set it as OS evn variable (for example on your laptop or in docker container evn) 
 3. Build docker image locally, `sbt docker:publishLocal`
-4. Run it `docker run --network=host --env BOOKS_NYCTIMES_API_KEY=<API key obtained on step 2> books:0.1.0-SNAPSHOT -p 8081`
+4. Run it `docker run --network=host --env BOOKS_NYTIMES_API_KEY=<API key obtained on step 2> books:0.1.0-SNAPSHOT -p 8081`
    you also can overwrite port and other parameters defined in `application.conf`
    NB: when you run docker command remember that docker mind order of arguments in command line
 5. On your local machine you can check service using

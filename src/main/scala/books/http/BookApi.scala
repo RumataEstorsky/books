@@ -8,7 +8,8 @@ import io.finch._
 
 class BookApi(service: BookCachedProvider)
   extends Endpoint.Module[IO]
-    with ExecutionMetrics {
+    with ExecutionMetrics
+    with ErrorHandling {
 
   case class BooksSearch(author: String, years: List[Int])
 
@@ -25,12 +26,15 @@ class BookApi(service: BookCachedProvider)
         author = search.author.trim,
         years = search.years.toSet
       ).map(Ok)
+    }.handle {
+      case e: Exception => BadRequest(e)
     }
   }
 
   def healthcheck: Endpoint[IO, String] = get(pathEmpty) {
     Ok("OK")
   }
+
 
 }
 

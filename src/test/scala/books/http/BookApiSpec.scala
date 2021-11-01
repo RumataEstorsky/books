@@ -1,7 +1,7 @@
 package books.http
 
 import books.TestCommons
-import books.nytimes.NycTimesClient
+import books.nytimes.NytTimesClient
 import books.service.BookCachedProvider
 import cats.effect.IO
 import io.finch.Input
@@ -9,11 +9,10 @@ import org.mockito.MockitoSugar
 import org.specs2.mutable.Specification
 
 import scala.concurrent.duration._
-import scala.io.Source
 
 class BookApiSpec extends Specification with MockitoSugar with TestCommons {
 
-  private val clientMock = mock[NycTimesClient]
+  private val clientMock = mock[NytTimesClient]
   private val cachedProvider = new BookCachedProvider(clientMock, 50.millis)
   private val bookApi = new BookApi(cachedProvider)
 
@@ -25,7 +24,7 @@ class BookApiSpec extends Specification with MockitoSugar with TestCommons {
 
     "return books by author" in {
 
-      decodeResource("books/nyctimes/yuva-noah-harari-reviews.json").map { response =>
+      decodeResource("books/nytimes/yuva-noah-harari-reviews.json").map { response =>
         when(clientMock.reviews("Yuval Noah Harari")).thenReturn(IO.pure(response))
       }
 
