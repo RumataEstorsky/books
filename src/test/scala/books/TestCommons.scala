@@ -1,6 +1,6 @@
 package books
 
-import books.nytimes.NytRootResponse
+import books.nyt.NytRootResponse
 import io.circe
 import io.circe.generic.auto._
 import io.circe.parser.decode

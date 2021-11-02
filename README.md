@@ -18,3 +18,14 @@ Author name is mandatory, year is optional, you can specify more than one year.
 ```
 curl --request GET --url 'http://localhost:8081/me/books/list?year=2018&year=2017&author=Stephen%20King'
 ```
+
+
+sbt coverageReport
+
+1. Error (bad API) into log, any errors into logs
+2. Error Response JSON
+3. Prometheus
+4. Tests for all cases
+5. check compiler and idea warnings + `sbt coverageReport`
+
+

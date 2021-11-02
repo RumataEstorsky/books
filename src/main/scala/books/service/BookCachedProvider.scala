@@ -1,7 +1,7 @@
 package books.service
 
 import books.models.Book
-import books.nytimes.{NytBook, NytTimesClient}
+import books.nyt.{NytBook, NytClient}
 import cats.effect._
 import scalacache._
 import scalacache.caffeine._
@@ -10,7 +10,7 @@ import scalacache.memoization._
 import java.time.LocalDate
 import scala.concurrent.duration._
 
-class BookCachedProvider(client: NytTimesClient, cacheTTL: FiniteDuration = 3.minutes) {
+class BookCachedProvider(client: NytClient, cacheTTL: FiniteDuration = 3.minutes) {
   implicit val cache: Cache[Seq[Book]] = CaffeineCache[Seq[Book]]
   implicit val mode: Mode[IO] = scalacache.CatsEffect.modes.async
 

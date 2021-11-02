@@ -1,6 +1,6 @@
 package books
 
-package object nytimes {
+package object nyt {
   case class NytBook(
                       publication_dt: String,
                       byline: String,
@@ -14,6 +14,16 @@ package object nytimes {
                               num_results: Int,
                               results: Seq[NytBook]
                             )
+
+  // Error response
+  class NytApiError(reason: String) extends Exception(s"NY Times API Error: $reason")
+  case class Detail (errorcode: String)
+  case class Fault (faultstring: String, detail: Detail)
+  case class NytFault(fault: Fault) {
+    def toError: NytApiError = new NytApiError(s"(${fault.detail.errorcode}) ${fault.faultstring}")
+  }
+
+
 
 
 }

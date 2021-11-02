@@ -8,7 +8,6 @@ object Dependencies {
     "com.github.finagle" %% "finchx-circe" % finchVersion,
     "io.github.felixbr" %% "finagle-http-effect" % "0.3.0",
     "io.chrisdavenport" %% "log4cats-slf4j" % "1.1.1",
-    //    "com.twitter" %% "finagle-stats" % "21.9.0",
     "com.samstarling" %% "finagle-prometheus" % "0.0.15"
   )
 
@@ -37,11 +36,11 @@ object Dependencies {
   )
 
 
-  val specs2Version = "4.13.0"
-  val mockitoScalaVersion = "1.16.46"
+  val scalaTestVersion = "3.2.10"
   val specs = Seq(
-    "org.mockito" %% "mockito-scala-specs2" % mockitoScalaVersion % Test,
-    "org.specs2" %% "specs2-core" % specs2Version % Test
+    "org.scalatest" %% "scalatest" % scalaTestVersion %  Test,
+    "org.scalatestplus" %% "mockito-3-4" % "3.2.10.0" % Test,
+//    "com.disneystreaming" %% "weaver-cats" % "0.7.7" % Test
   )
 
   val all: Seq[ModuleID] = finch ++ circe ++ logging ++ scalaCache ++ etc ++ specs
