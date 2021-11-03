@@ -18,9 +18,9 @@ class NytClient(rootUrl: URL, apiKey: String, requestTimeout: FiniteDuration, st
 
   import NytClient._
 
-//  private val requestsSuccesses: Counter = statsReceiver.counter(s"$MetricsReviewsPrefix.successes-counter")
-//  private val requestsFailures: Counter = statsReceiver.counter(s"$MetricsReviewsPrefix.failures-counter")
-//  private val requestsLatency: Stat = statsReceiver.stat(s"$MetricsReviewsPrefix.request-latency")
+  private val requestsSuccesses: Counter = statsReceiver.counter(s"$MetricsReviewsPrefix.successes-counter")
+  private val requestsFailures: Counter = statsReceiver.counter(s"$MetricsReviewsPrefix.failures-counter")
+  private val requestsLatency: Stat = statsReceiver.stat(s"$MetricsReviewsPrefix.request-latency")
 
   implicit val decodeRootResponse: Decoder[NytRootResponse] = deriveDecoder
   implicit val decodeNytBook: Decoder[NytBook] = deriveDecoder
@@ -37,10 +37,10 @@ class NytClient(rootUrl: URL, apiKey: String, requestTimeout: FiniteDuration, st
 
   private def digest(response: Response): Either[Exception, NytRootResponse] =
     if (response.status == Ok) {
-//      requestsSuccesses.incr()
+      requestsSuccesses.incr()
       decode[NytRootResponse](response.contentString)
     } else {
-//      requestsFailures.incr()
+      requestsFailures.incr()
       decodeFailure(response.contentString)
     }
 
@@ -50,7 +50,7 @@ class NytClient(rootUrl: URL, apiKey: String, requestTimeout: FiniteDuration, st
     case Right(f) => Left(f.toError)
   }
 
-  def reviews(author: String): IO[NytRootResponse] = /*Stat.time(requestsLatency) {*/
+  def reviews(author: String): IO[NytRootResponse] = Stat.time(requestsLatency) {
     httpClient.use { srv =>
       val request = RequestBuilder()
         .url(Request(rootUrl.toString, "author" -> author, "api-key" -> apiKey).uri)
@@ -62,8 +62,7 @@ class NytClient(rootUrl: URL, apiKey: String, requestTimeout: FiniteDuration, st
         _ <- log.info(s"Got from NewYork Times results: ${result.num_results}")
       } yield result
     }
-    //TODO counter failures or total counter
- /* }*/
+  }
 }
 
 object NytClient {
