@@ -6,7 +6,7 @@ import books.nyt.NytClient
 import books.service.BookCachedProvider
 import cats.effect.IO
 import io.finch.Input
-import org.mockito.Mockito.{times, verify, verifyNoInteractions, verifyNoMoreInteractions, when}
+import org.mockito.Mockito.{times, verify, when}
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 import org.scalatestplus.mockito.MockitoSugar
@@ -17,7 +17,7 @@ class BookApiSpec extends AnyFlatSpec with should.Matchers with MockitoSugar wit
 
   private val testCacheTTL = 10.millis
 
-  trait Components {
+  private trait Components {
     val clientMock: NytClient = mock[NytClient]
     val cachedProvider = new BookCachedProvider(clientMock, testCacheTTL)
     val bookApi = new BookApi(cachedProvider)

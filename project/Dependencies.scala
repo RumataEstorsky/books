@@ -37,10 +37,13 @@ object Dependencies {
 
 
   val scalaTestVersion = "3.2.10"
+  val mockserverVersion = "5.11.2"
   val specs = Seq(
     "org.scalatest" %% "scalatest" % scalaTestVersion %  Test,
     "org.scalatestplus" %% "mockito-3-4" % "3.2.10.0" % Test,
-//    "com.disneystreaming" %% "weaver-cats" % "0.7.7" % Test
+    "org.mock-server" % "mockserver-client-java" % mockserverVersion % Test,
+    "org.mock-server" % "mockserver-netty" % mockserverVersion % Test,
+    "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.12.2"  % Test,
   )
 
   val all: Seq[ModuleID] = finch ++ circe ++ logging ++ scalaCache ++ etc ++ specs

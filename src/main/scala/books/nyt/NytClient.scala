@@ -29,11 +29,10 @@ class NytClient(rootUrl: URL, apiKey: String, requestTimeout: FiniteDuration, st
   implicit val decodeDetail: Decoder[Detail] = deriveDecoder
 
   private val httpClient = FinagleHttpClientBuilder[IO]
-    .withUpdatedConfig(
-      _.withRequestTimeout(requestTimeout)
-        .withTls(rootUrl.getHost)
-        .withStatsReceiver(statsReceiver)
-    ).serviceResource(s"${rootUrl.getHost}:443")
+    .withUpdatedConfig { s =>
+      s.withRequestTimeout(requestTimeout).withStatsReceiver(statsReceiver)
+      if(rootUrl.getProtocol == "https") s.withTls(rootUrl.getHost) else s
+    }.serviceResource(s"${rootUrl.getHost}:${rootUrl.getPort}")
 
   private def digest(response: Response): Either[Exception, NytRootResponse] =
     if (response.status == Ok) {
